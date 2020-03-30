@@ -8,6 +8,6 @@ public class FlingueShow : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.eulerAngles += new Vector3(0, Time.deltaTime * velocity, 0);
+        gameObject.transform.eulerAngles = new Vector3(gameObject.transform.eulerAngles.x , gameObject.transform.eulerAngles.y + Time.deltaTime * velocity, gameObject.transform.eulerAngles.z);
     }
 }
