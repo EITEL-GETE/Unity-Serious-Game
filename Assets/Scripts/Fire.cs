@@ -16,7 +16,7 @@ public class Fire : MonoBehaviour
     {
         if ( Input.GetButtonDown("Fire1") && !temp)
         {
-            switch (GameObject.Find("Character").GetComponent<Inventory>().weapon)
+            switch (GameObject.Find("Character").GetComponent<Hand>().weapon)
             {
                 case 1:
                     Instantiate(bullet, spawnPoint.position, spawnPoint.rotation * Quaternion.Euler(0, 0, 0), gameObject.transform);

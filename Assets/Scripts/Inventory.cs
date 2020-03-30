@@ -1,51 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
-    public GameObject weaponText;
-    public int nWeapon = 2;
+    public GameObject canvas;
+    public GameObject joueur;
+    public GameObject HUD;
+    public KeyCode inventory = KeyCode.E;
 
-    public int weapon = 1;
+    public bool open = false;
+
+    bool temp = false;
 
     void Update()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") < 0)
+        if (Input.GetKeyDown(inventory) && !temp)
         {
-            if (weapon < nWeapon)
-            {
-                weapon++;
-            }
-            else
-            {
-                weapon = 1;
-            }
+            open = !open;
+            temp = true;
         }
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0)
+        if (Input.GetKeyUp(inventory))
         {
-            if (weapon > 1)
-            {
-                weapon--;
-            }
-            else
-            {
-                weapon = nWeapon;
-            }
+            temp = false;
         }
 
-        // Choix de l'arme
+        canvas.SetActive(open);
+        HUD.SetActive(!open);
+        joueur.GetComponent<PlayerMouvement>().enabled = !open;
+        joueur.GetComponent<Fire>().enabled = !open;
+        joueur.GetComponent<MouseLook>().enabled = !open;
+        joueur.GetComponent<Hand>().enabled = !open;
 
-        switch (weapon)
+        if (open)
         {
-            case 1:
-                weaponText.GetComponent<UnityEngine.UI.Text>().text = "Pistol";
-                break;
-            case 2:
-                weaponText.GetComponent<UnityEngine.UI.Text>().text = "Shotgun";
-                break;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 }
