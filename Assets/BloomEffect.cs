@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [ExecuteInEditMode, ImageEffectAllowedInSceneView]
 public class BloomEffect : MonoBehaviour
@@ -24,7 +25,7 @@ public class BloomEffect : MonoBehaviour
 
     RenderTexture[] textures = new RenderTexture[16];
 
-    // [NonSerialized]
+    [NonSerialized]
     Material bloom;
 
     void OnRenderImage (RenderTexture source, RenderTexture destination)
